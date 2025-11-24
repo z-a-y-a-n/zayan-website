@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed Zayan U - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --bg-light: #ffffff;
+            --bg-dark: #0f172a;
+            --text-light: #1e293b;
+            --text-dark: #f1f5f9;
+            --card-light: #f8fafc;
+            --card-dark: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-light);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            color: var(--text-dark);
+            background: var(--bg-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode nav {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        body.dark-mode .btn-secondary {
+            color: var(--text-dark);
+            border-color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Updated Profile Photo Styling - Square, Clean, Professional */
+        .hero-image {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s ease 0.8s both;
+        }
+
+        .profile-photo-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .profile-photo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.3s ease;
+        }
+
+        .profile-photo-container:hover .profile-photo {
+            filter: brightness(1.05);
+        }
+
+        .profile-card {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        body.dark-mode .profile-card {
+            background: var(--card-dark);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .interests {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .interest-item {
+            background: var(--card-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .interest-item {
+            background: var(--card-dark);
+        }
+
+        .interest-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .interest-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--bg-light);
+        }
+
+        body.dark-mode .timeline-item::before {
+            border-color: var(--bg-dark);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .duration {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-light);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        body.dark-mode .project-card {
+            background: var(--card-dark);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .project-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            background: var(--card-light);
+            padding: 2rem 3rem;
+            border-radius: 15px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .social-card {
+            background: var(--card-dark);
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+        }
+
+        .social-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-light);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        body.dark-mode footer {
+            background: var(--card-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .profile-photo-container {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">MZ</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#social">Social</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Mohammed Zayan U</h1>
+                    <p class="subtitle">Aspiring Data Scientist</p>
+                    <p>Tech enthusiast passionate about Python, data science, and building innovative solutions. Turning
+                        data into insights and ideas into reality.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#social" class="btn btn-secondary">Connect</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-photo-container">
+                        <img src="me.jpeg" alt="Mohammed Zayan U - Profile Photo" class="profile-photo">
+                    </div>
+                    <div class="profile-card">
+                        <h3 style="margin-bottom: 1rem;">Tech is amazing and powerful</h3>
+                        <p>🐍 Python Developer</p>
+                        <p>🌐 Web Developer</p>
+                        <p>🤖 Arduino Enthusiast</p>
+                        <p>📊 Data Science Aspirant</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="fade-in">
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Hello! I'm <strong>Mohammed Zayan</strong>, a technology enthusiast from India with a passion
+                        for data science and software development. I believe in the power of technology to solve
+                        real-world problems and create meaningful impact.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+                        My journey in tech has been diverse, spanning from Python development to web technologies and
+                        hardware tinkering with Arduino. My ultimate goal is to become a data scientist, leveraging the
+                        power of data to drive insights and innovation.
+                    </p>
+                </div>
+                <div class="interests fade-in">
+                    <div class="interest-item">
+                        <h3>🐍 Python3</h3>
+                        <p>My best friend in coding. The tool I turn to for solving complex problems and building
+                            efficient solutions.</p>
+                    </div>
+                    <div class="interest-item">
+                        <h3>🌐 Web Development</h3>
+                        <p>Creating interactive experiences with HTML, CSS, and JavaScript. Always learning and
+                            improving.</p>
+                    </div>
+                    <div class="interest-item">
+                        <h3>🤖 Arduino</h3>
+                        <p>Exploring the intersection of software and hardware with Arduino UNO Rev3 projects.</p>
+                    </div>
+                    <div class="interest-item">
+                        <h3>📊 MS Office Suite</h3>
+                        <p>Proficient in Word, Excel, and PowerPoint for productivity and data management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">My Journey</h2>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <h3>Python Developer</h3>
+                    <p class="duration">2 years</p>
+                    <p>Honed skills in Python, working on diverse projects from data analysis to web development.
+                        Mastered the nuances of the language and its application in solving real-world problems.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Front-End Web Developer</h3>
+                    <p class="duration">1 year</p>
+                    <p>Mastered HTML, CSS, and JavaScript to create engaging and interactive websites, ensuring seamless
+                        user experiences across different platforms.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Arduino Enthusiast</h3>
+                    <p class="duration">1 year</p>
+                    <p>Explored microcontrollers and electronics with Arduino Uno R3, working on projects involving
+                        sensors, actuators, and embedded systems.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>MS Office Proficiency</h3>
+                    <p class="duration">Several months</p>
+                    <p>Became proficient in the MS Office suite, mastering document processing, data manipulation, and
+                        presentation creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <h3>Avenge-IDE</h3>
+                    <p>An Integrated Development Environment specifically designed for Python3, providing a seamless
+                        coding experience with powerful features for Python developers.</p>
+                    <a href="https://github.com/z-a-y-a-n/Avenge-IDE" class="project-link" target="_blank">View on
+                        GitHub →</a>
+                </div>
+                <div class="project-card fade-in">
+                    <h3>PikaDex</h3>
+                    <p>A comprehensive Pokédex application to identify and learn about various Pokémon. A must-have tool
+                        for Pokémon enthusiasts.</p>
+                    <a href="https://github.com/z-a-y-a-n/PikaDex" class="project-link" target="_blank">View on GitHub
+                        →</a>
+                </div>
+                <div class="project-card fade-in">
+                    <h3>GiftDash</h3>
+                    <p>An engaging game where players collect gifts bestowed by the gods. A fun way to challenge your
+                        reflexes and pass the time.</p>
+                    <a href="https://github.com/z-a-y-a-n/Gift-Dash" class="project-link" target="_blank">View on GitHub
+                        →</a>
+                </div>
+                <div class="project-card fade-in">
+                    <h3>NewEra</h3>
+                    <p>A Python repository marking the beginning of a new era in Python development. A resource for
+                        experts and beginners alike.</p>
+                    <a href="https://github.com/z-a-y-a-n/NewEra" class="project-link" target="_blank">View on GitHub
+                        →</a>
+                </div>
+                <div class="project-card fade-in">
+                    <h3>FeedBack App</h3>
+                    <p>A simple feedback application created using Anvil. Share your thoughts and help improve projects
+                        through constructive feedback.</p>
+                    <a href="https://feed-it-back.anvil.app/" class="project-link" target="_blank">Try the App →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem;">Find me on these platforms</p>
+            <div class="social-links">
+                <a href="https://github.com/z-a-y-a-n" class="social-card fade-in" target="_blank">
+                    <h3>GitHub</h3>
+                    <p>Check out my code</p>
+                </a>
+                <a href="https://replit.com/@z-a-y-a-n" class="social-card fade-in" target="_blank">
+                    <h3>Replit</h3>
+                    <p>Live coding projects</p>
+                </a>
+                <a href="https://www.freecodecamp.org/MohammedZayan" class="social-card fade-in" target="_blank">
+                    <h3>freeCodeCamp</h3>
+                    <p>Learning journey</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mohammed Zayan U. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.textContent = '☀️ Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                btn.textContent = '🌙 Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.theme-toggle').textContent = '☀️ Light';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
